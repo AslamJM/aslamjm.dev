@@ -29,7 +29,7 @@ const socialLinks: SocialLinkProps[] = [
   {
     href: "https://linkedin.com",
     Icon: LinkedIn,
-    className: "w-6 ml-4",
+    className: "w-6 ml-2",
   },
 ];
 
@@ -55,7 +55,13 @@ const NavLink = ({ to, classname }: { to: string; classname?: string }) => {
 
 const SocialLink = ({ href, Icon, className }: SocialLinkProps) => {
   return (
-    <MotionLink href={href} whileHover={{ y: -2 }} whileTap={{ scale: 0.9 }}>
+    <MotionLink
+      href={href}
+      target="_blank"
+      whileHover={{ y: -2 }}
+      whileTap={{ scale: 0.9 }}
+      className="flex items-center justify-center"
+    >
       <Icon className={className} />
     </MotionLink>
   );
