@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+import { fontFamily } from "tailwindcss/defaultTheme";
+
 module.exports = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx}",
@@ -9,7 +11,15 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        mont: [`var(--font-mont)`, ...fontFamily.sans],
+      },
+      colors: {
+        light: "#f1f1f1",
+        dark: "#1b1b1b",
+      },
+    },
   },
   plugins: [require("@tailwindcss/typography"), require("preline/plugin")],
 };

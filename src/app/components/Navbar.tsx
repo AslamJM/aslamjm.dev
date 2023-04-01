@@ -1,45 +1,89 @@
+"use client";
+
 import Link from "next/link";
-import React from "react";
-import { FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
+import React, { SVGProps } from "react";
+import { motion } from "framer-motion";
+import { usePathname } from "next/navigation";
 
-// TODO: need to fixate on a secondary color
-// TODO: need to finalize about the pages to display
+import { GithubIcon, TwitterIcon, LinkedIn } from "@/icons/SocialIcons";
 
-const NavLink = ({ to }: { to: string }) => {
+const MotionLink = motion(Link);
+
+interface SocialLinkProps {
+  href: string;
+  Icon: ({ className, ...rest }: SVGProps<SVGSVGElement>) => JSX.Element;
+  className?: string;
+}
+
+const socialLinks: SocialLinkProps[] = [
+  {
+    href: "https://twitter.com",
+    Icon: TwitterIcon,
+    className: "w-6 mr-2",
+  },
+  {
+    href: "https://github.com/AslamJM",
+    Icon: GithubIcon,
+    className: "w-6 mx-2",
+  },
+  {
+    href: "https://linkedin.com",
+    Icon: LinkedIn,
+    className: "w-6 ml-4",
+  },
+];
+
+const NavLink = ({ to, classname }: { to: string; classname?: string }) => {
+  const path = usePathname();
+  const href = to.toLowerCase();
   return (
     <Link
-      href={`${to.toLowerCase()}`}
-      className="text-md md:text-lg hover:font-bold text-slate-800 hover:text-rose-600 transition-all font-semibold underline underline-offset-2"
+      href={href}
+      className={`text-md md:text-lg  text-dark font-semibold relative group ${classname}`}
     >
       {to}
+      <span
+        className={`absolute inline-block bg-dark -bottom-0.5 left-0 ${
+          path === href ? "w-full" : "w-0"
+        } group-hover:w-full h-[1px] ease duration-300`}
+      >
+        &nbsp;
+      </span>
     </Link>
+  );
+};
+
+const SocialLink = ({ href, Icon, className }: SocialLinkProps) => {
+  return (
+    <MotionLink href={href} whileHover={{ y: -2 }} whileTap={{ scale: 0.9 }}>
+      <Icon className={className} />
+    </MotionLink>
   );
 };
 
 function Navbar() {
   return (
-    <nav className="flex flex-col md:flex-row items-center justify-center md:justify-between py-1 md:py-3 shadow-sm mx-2">
+    <nav className="flex flex-col md:flex-row items-center font-mont justify-center md:justify-between py-1 md:py-3 shadow-sm mx-2">
       <Link
         href="/"
-        className="text-xl md:text-2xl text-slate-950 hover:text-rose-600 tracking-wider font-bold  underline-offset-2"
+        className="text-xl md:text-2xl text-dark hover:text-rose-600 tracking-wider font-bold  underline-offset-2"
       >
         /aslamjm.dev/
       </Link>
-      <div className="flex items-center justify-center gap-4">
+      <div className="flex items-center justify-center ">
         {["Projects", "Ideas", "Blog"].map((link) => (
-          <NavLink key={link} to={link} />
+          <NavLink key={link} to={link} classname="mx-2 md:mx-4" />
         ))}
       </div>
-      <div className="flex items-center gap-3 invisible md:visible">
-        <Link href="https://github.com/AslamJM">
-          <FaGithub className="h-6 w-6 cursor-pointer hover:text-rose-600" />
-        </Link>
-        <Link href="https://twitter.com">
-          <FaTwitter className="h-6 w-6 cursor-pointer hover:text-rose-600" />
-        </Link>
-        <Link href="https://linkedin.com">
-          <FaLinkedin className="h-6 w-6 cursor-pointer hover:text-rose-600" />
-        </Link>
+      <div className="flex items-center invisible md:visible">
+        {socialLinks.map((link, index) => (
+          <SocialLink
+            key={link.href + "-" + index}
+            Icon={link.Icon}
+            href={link.href}
+            className={link.className}
+          />
+        ))}
       </div>
     </nav>
   );

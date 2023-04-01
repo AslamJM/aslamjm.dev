@@ -1,13 +1,6 @@
-import { Poppins } from "next/font/google";
-
-const poppins = Poppins({
-  weight: ["400", "500", "800", "700"],
-  subsets: ["latin"],
-});
-
 export default function Home() {
   return (
-    <main className={poppins.className}>
+    <main>
       <h1 className="text-2xl underline underline-offset-4 text-center text-amber-900 mb-3">
         Welcome to my Blog
       </h1>
