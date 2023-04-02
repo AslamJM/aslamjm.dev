@@ -12,9 +12,6 @@ module.exports = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        mont: [`var(--font-mont)`, ...fontFamily.sans],
-      },
       colors: {
         light: "#f1f1f1",
         dark: "#1b1b1b",

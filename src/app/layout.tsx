@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Montserrat } from "next/font/google";
+import { Nunito } from "next/font/google";
 import Navbar from "./components/Navbar";
 
 export const metadata = {
@@ -7,9 +7,8 @@ export const metadata = {
   description: "my portfolio and blog",
 };
 
-const montserrat = Montserrat({
+const nunito = Nunito({
   subsets: ["latin"],
-  variable: "--font-mont",
 });
 
 export default function RootLayout({
@@ -20,7 +19,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${montserrat.variable} font-mont bg-light text-dark w-full min-h-screen`}
+      className={`${nunito.className}  bg-light text-dark w-full min-h-screen`}
     >
       <body className="container mx-auto">
         <Navbar />

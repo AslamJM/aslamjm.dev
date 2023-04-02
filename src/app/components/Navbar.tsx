@@ -15,6 +15,12 @@ interface SocialLinkProps {
   className?: string;
 }
 
+interface NavlinkProps {
+  href: string;
+  name: string;
+  classname?: string;
+}
+
 const socialLinks: SocialLinkProps[] = [
   {
     href: "https://twitter.com",
@@ -33,15 +39,37 @@ const socialLinks: SocialLinkProps[] = [
   },
 ];
 
-const NavLink = ({ to, classname }: { to: string; classname?: string }) => {
+const navlinks: NavlinkProps[] = [
+  {
+    href: "/",
+    name: "Home",
+    classname: "mr-2 md:mr-4",
+  },
+  {
+    href: "/projects",
+    name: "Projects",
+    classname: "mx-2 md:mx-4",
+  },
+  {
+    href: "/ideas",
+    name: "Ideas",
+    classname: "mx-2 md:mx-4",
+  },
+  {
+    href: "/blog",
+    name: "Blog",
+    classname: "ml-2 md:ml-4",
+  },
+];
+
+const NavLink = ({ href, classname, name }: NavlinkProps) => {
   const path = usePathname();
-  const href = to.toLowerCase();
   return (
     <Link
       href={href}
       className={`text-md md:text-lg  text-dark font-semibold relative group ${classname}`}
     >
-      {to}
+      {name}
       <span
         className={`absolute inline-block bg-dark -bottom-0.5 left-0 ${
           path === href ? "w-full" : "w-0"
@@ -69,7 +97,7 @@ const SocialLink = ({ href, Icon, className }: SocialLinkProps) => {
 
 function Navbar() {
   return (
-    <nav className="flex flex-col md:flex-row items-center font-mont justify-center md:justify-between py-1 md:py-3 shadow-sm mx-2">
+    <nav className="flex flex-col md:flex-row items-center font-mont justify-center md:justify-between py-1 md:py-3  border-b-dark mx-2">
       <Link
         href="/"
         className="text-xl md:text-2xl text-dark hover:text-rose-600 tracking-wider font-bold  underline-offset-2"
@@ -77,8 +105,13 @@ function Navbar() {
         /aslamjm.dev/
       </Link>
       <div className="flex items-center justify-center ">
-        {["Projects", "Ideas", "Blog"].map((link) => (
-          <NavLink key={link} to={link} classname="mx-2 md:mx-4" />
+        {navlinks.map((link, index) => (
+          <NavLink
+            key={link.href + "-" + index}
+            href={link.href}
+            name={link.name}
+            classname={link.classname}
+          />
         ))}
       </div>
       <div className="flex items-center invisible md:visible">
