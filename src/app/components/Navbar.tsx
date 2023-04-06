@@ -95,6 +95,21 @@ const SocialLink = ({ href, Icon, className }: SocialLinkProps) => {
   );
 };
 
+export const SocialLinkComponent = () => {
+  return (
+    <div className="flex items-center invisible md:visible">
+      {socialLinks.map((link, index) => (
+        <SocialLink
+          key={link.href + "-" + index}
+          Icon={link.Icon}
+          href={link.href}
+          className={link.className}
+        />
+      ))}
+    </div>
+  );
+};
+
 function Navbar() {
   return (
     <nav className="flex flex-col md:flex-row items-center font-mont justify-center md:justify-between py-1 md:py-3  border-b-dark mx-2">
