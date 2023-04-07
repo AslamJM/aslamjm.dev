@@ -115,9 +115,9 @@ function Navbar() {
     <nav className="flex flex-col md:flex-row items-center font-mont justify-center md:justify-between py-1 md:py-3  border-b-dark mx-2">
       <Link
         href="/"
-        className="text-xl md:text-2xl text-dark hover:text-rose-600 tracking-wider font-bold  underline-offset-2"
+        className="text-xl md:text-2xl text-dark hover:text-rose-600  font-bold "
       >
-        /aslamjm.dev/
+        {`<aslamjm.dev/>`}
       </Link>
       <div className="flex items-center justify-center ">
         {navlinks.map((link, index) => (
