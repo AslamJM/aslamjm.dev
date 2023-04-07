@@ -10,7 +10,7 @@ const Heading = ({ text }: { text: string }) => {
 
 const Hero = () => {
   return (
-    <div className="flex items-center justify-center mt-4">
+    <div className="flex items-center justify-center mt-1 md:mt-4">
       <div className="w-full md:w-1/2 p-2">
         <Heading text="Finding myself in the world of  science and technology." />
         <p className="text-justify md:text-left text-md md:text-lg text-dark">
